@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.SpeedQuiz.TitleText.Title" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="titleTextAppearance">?android:attr/textColor</item>
+    </style>
+</resources>
