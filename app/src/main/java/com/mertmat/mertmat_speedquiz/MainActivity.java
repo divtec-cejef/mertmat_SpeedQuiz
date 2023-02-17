@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextOne;
     private EditText editTextTwo;
 
+    /**
+     * Va exécuter le code dans la fonction au lancement
+     *  de l'application
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
