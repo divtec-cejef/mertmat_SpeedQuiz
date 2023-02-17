@@ -24,12 +24,12 @@ public class SpeedQuizSqlite extends SQLiteOpenHelper {
         String sqlCreateDataTable = "CREATE TABLE quiz (idQuiz INTEGER PRIMARY KEY AUTOINCREMENT, question TEXT, reponse BOOLEAN)";
         db.execSQL(sqlCreateDataTable);
         // Permet de définir les question et directement donnée sir c'est vrais ou faux 0 - 1 avec boolean
-        db.execSQL("INSERT INTO quiz VALUES (null,\"L'ours polaire est blanc sous sa fourure\", 1)");
-        db.execSQL("INSERT INTO quiz VALUES (null,\"Les noix de cocos tuent plus de gens que les requins\", 0)");
-        db.execSQL("INSERT INTO quiz VALUES (null,\"La joconde n'a pas de sourcils\", 1)");
-        db.execSQL("INSERT INTO quiz VALUES (null,\"Les allemands sont tous des nazis\", 0)");
-        db.execSQL("INSERT INTO quiz VALUES (null,\"Odin est utile\", 1)");
-        db.execSQL("INSERT INTO quiz VALUES (null,\"Xavier n'a pas d'enfant dans sa cave\", 1)");
+        db.execSQL("INSERT INTO quiz VALUES (null,\"L'ours polaire est brun sous sa fourure\", 1)");
+        db.execSQL("INSERT INTO quiz VALUES (null,\"Les requins ne tuent plus de gens que les noix de cocos \", 1)");
+        db.execSQL("INSERT INTO quiz VALUES (null,\"La joconde n'a pas de sourcils\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null,\"La Suisse à l'allemand, le français, l'italien et le Suisse comme langues principaux\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null,\"Odin est utile\", 0)");
+        db.execSQL("INSERT INTO quiz VALUES (null,\"Xavier n'a pas d'enfant dans sa cave\", 0)");
 
     }
 
