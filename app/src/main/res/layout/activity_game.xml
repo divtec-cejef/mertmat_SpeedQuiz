@@ -4,33 +4,136 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameActivity"
     android:screenOrientation="landscape"
-    >
+    tools:context=".GameActivity">
 
     <TextView
         android:id="@+id/name_player_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/joueur_one_saisi"
-        android:layout_marginTop="@dimen/app_margin"
-        android:layout_marginLeft="@dimen/app_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/app_margin"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="260dp"
         android:rotation="180"
-        />
+        android:text="@string/joueur_one_saisi"
+        app:layout_constraintBottom_toTopOf="@+id/score_player_one"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/elevatedButtons"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buttom_one_true"
-        app:layout_constraintBo_toTopOf="parent"
+        android:layout_margin="@dimen/app_margin"
+        android:rotation="180"
+        android:text="@string/buttom_true"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/name_player_one"
-        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/question_player_one"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/question_player_two"
         android:rotation="180"
+        android:layout_margin="@dimen/app_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/elevatedButtons"
         />
+
+    <TextView
+        android:id="@+id/score_player_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="180"
+        android:text="@string/score_player_one"
+        android:textSize="80sp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/question_player_two"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_player_one"
+        />
+
+    <Button
+        android:id="@+id/bt_restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttom_restart"
+        android:layout_margin="@dimen/app_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
+        android:text="@string/buttom_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bt_restart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/winnerGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/winner_Game"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bt_restart"
+        app:layout_constraintStart_toEndOf="@+id/score_player_one"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score_player_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score_player_one"
+        android:textSize="80sp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/question_player_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_player_one" />
+
+    <TextView
+        android:id="@+id/question_player_two"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
+        android:text="@string/question_player_one"
+        app:layout_constraintBottom_toTopOf="@+id/trueButtomsTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/name_player_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/joueur_two_saisi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score_player_two" />
+
+    <Button
+        android:id="@+id/trueButtomsTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/app_margin"
+        android:layout_marginBottom="8dp"
+        android:text="@string/buttom_true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/name_player_two"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

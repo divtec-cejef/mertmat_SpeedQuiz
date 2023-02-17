@@ -3,9 +3,17 @@
     <string name="title_game">SpeedQuiz the Game</string>
     <string name="joueur_one_saisi">Saisie nom joueur 1</string>
     <string name="joueur_two_saisi">Saisie nom joueur 2</string>
-    <string name="buttom_one_true">Vrais</string>
     <string name="buttom_ok">Continuer</string>
     <string name="text_indication">Saisissez le nom des joueurs</string>
     <string name="title_menu_fav">Menu settings</string>
     <string name="sttings_title">Settings</string>
+    <string name="buttom_true">Vrais</string>
+    <string name="question_player_one">Question test</string>
+    <string name="question_player_two">Question test</string>
+    <string name="score_player_one">0</string>
+    <string name="score_player_two">0</string>
+    <string name="buttom_restart">Rejouer</string>
+    <string name="buttom_menu">Menu</string>
+    <string name="game_end_countdown">Finish</string>
+    <string name="winner_Game">Winner: </string>
 </resources>

@@ -34,16 +34,16 @@
             android:layout_margin="@dimen/app_margin"
             android:layout_gravity="center" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_indication" />
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="text_indication"
-            android:
-            />
     </RelativeLayout>
 
     <LinearLayout
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
