@@ -23,19 +23,19 @@ public class GameActivity extends AppCompatActivity {
 
     // Variable global qui va stocker le question en cours
     Question question;
-    int pointJoueur1;
-    int pointJoueur2;
+    int pointPlayer1;
+    int pointPlayer2;
 
 
     // Variable composé des éléments composants la page
-    private Button bt_vrais_1;
-    private Button bt_vrais_2;
-    private Button rejouer;
+    private Button bt_True_1;
+    private Button bt_True_2;
+    private Button restart;
     private Button menu;
     private TextView score1;
     private TextView score2;
-    private TextView nom_joueur_1;
-    private TextView nom_joueur_2;
+    private TextView name_Player_1;
+    private TextView name_Player_2;
     private TextView winner_Game;
 
 
@@ -62,46 +62,46 @@ public class GameActivity extends AppCompatActivity {
 
         winner_Game = findViewById(R.id.winnerGame);
 
-        nom_joueur_1 = findViewById(R.id.name_player_one);
-        nom_joueur_1.setText(namePlayerOne);
+        name_Player_1 = findViewById(R.id.name_player_one);
+        name_Player_1.setText(namePlayerOne);
 
-        nom_joueur_2 = findViewById(R.id.name_player_two);
-        nom_joueur_2.setText(namePlayerTwo);
+        name_Player_2 = findViewById(R.id.name_player_two);
+        name_Player_2.setText(namePlayerTwo);
 
-        bt_vrais_1 = findViewById(R.id.elevatedButtons);
+        bt_True_1 = findViewById(R.id.elevatedButtons);
 
         // calcul si joueur à cliqué au bon moment
         // si non, on lui enlève un point, si oui on lui en ajoute un
-        bt_vrais_1.setOnClickListener(View -> {
+        bt_True_1.setOnClickListener(View -> {
             if (question.isReponse() == 0) {
-                pointJoueur1--;
+                pointPlayer1--;
             } else if (question.isReponse() == 1) {
-                pointJoueur1++;
+                pointPlayer1++;
             }
 
             // Va afficher le score du joueur un
-            score1.setText(String.valueOf(pointJoueur1));
+            score1.setText(String.valueOf(pointPlayer1));
             //Bloque le bouton "vrais" du joueur 1
             unlockPlayer(false);
         });
 
 
-        bt_vrais_2 = findViewById(R.id.trueButtomsTwo);
-        bt_vrais_2.setOnClickListener(View -> {
+        bt_True_2 = findViewById(R.id.trueButtomsTwo);
+        bt_True_2.setOnClickListener(View -> {
             if (question.isReponse() == 0) {
-                pointJoueur2--;
+                pointPlayer2--;
             } else if (question.isReponse() == 1) {
-                pointJoueur2++;
+                pointPlayer2++;
             }
             // Va afficher le score du joueur deux
-            score2.setText(String.valueOf(pointJoueur2));
+            score2.setText(String.valueOf(pointPlayer2));
             //Bloque le bouton "vrais" du joueur 2
             unlockPlayer(false);
         });
 
 
-        rejouer = findViewById(R.id.bt_restart);
-        rejouer.setOnClickListener(view -> {
+        restart = findViewById(R.id.bt_restart);
+        restart.setOnClickListener(view -> {
            this.finish();
             // Permet de relancer le jeu
             Intent thisElements = new Intent(GameActivity.this, GameActivity.class);
@@ -138,7 +138,7 @@ public class GameActivity extends AppCompatActivity {
         super.onStart();
 
         // Rend invisible et bloque les boutons
-        rejouer.setVisibility(View.GONE);
+        restart.setVisibility(View.GONE);
         menu.setVisibility(View.GONE);
         unlockPlayer(false);
 
@@ -171,13 +171,13 @@ public class GameActivity extends AppCompatActivity {
                     // Si oui, va lancer la procédure de fin de jeu
                 } else {
                     // Vérifie quel joueur a gagné
-                    if (pointJoueur1 > pointJoueur2) {
-                        winner_Game.setText(String.valueOf(nom_joueur_1));
+                    if (pointPlayer1 > pointPlayer2) {
+                        winner_Game.setText("Winner:" + String.valueOf(name_Player_1.getText()));
                     } else {
-                        winner_Game.setText(String.valueOf(nom_joueur_2));
+                        winner_Game.setText("Winner: " + String.valueOf(name_Player_2.getText()));
                     }
                     // Rends les boutons "menu" et "Rejouer" visible
-                    rejouer.setVisibility(View.VISIBLE);
+                    restart.setVisibility(View.VISIBLE);
                     menu.setVisibility(View.VISIBLE);
 
                     // Affiche à la place de la question, que le jeu est terminé
@@ -223,8 +223,8 @@ public class GameActivity extends AppCompatActivity {
     private void unlockPlayer(boolean etat) {
         // false = grisé
         // true = accessible
-       bt_vrais_1.setEnabled(etat);
-       bt_vrais_2.setEnabled(etat);
+       bt_True_1.setEnabled(etat);
+       bt_True_2.setEnabled(etat);
     }
 
 

@@ -15,5 +15,5 @@
     <string name="buttom_restart">Rejouer</string>
     <string name="buttom_menu">Menu</string>
     <string name="game_end_countdown">Finish</string>
-    <string name="winner_Game">Winner: </string>
+    <string name="winner_Game"> </string>
 </resources>
