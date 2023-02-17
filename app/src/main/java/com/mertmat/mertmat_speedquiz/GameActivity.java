@@ -226,6 +226,4 @@ public class GameActivity extends AppCompatActivity {
        bt_True_1.setEnabled(etat);
        bt_True_2.setEnabled(etat);
     }
-
-
 }
