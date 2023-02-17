@@ -20,11 +20,14 @@ public class GameActivity extends AppCompatActivity {
     MainActivity mainActivity;
     TextView questionPlayer1;
     TextView questionPlayer2;
+
     // Variable global qui va stocker le question en cours
     Question question;
     int pointJoueur1;
     int pointJoueur2;
 
+
+    // Variable composé des éléments composants la page
     private Button bt_vrais_1;
     private Button bt_vrais_2;
     private Button rejouer;
@@ -33,20 +36,31 @@ public class GameActivity extends AppCompatActivity {
     private TextView score2;
     private TextView nom_joueur_1;
     private TextView nom_joueur_2;
+    private TextView winner_Game;
 
 
+    /**
+     * Exécutera ce que contient la fonction à la première exécution
+     * de l'applis
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // Permet l'ouverture d'un chemin pour récupérer ce que le joueur a saisit
+        // Dans l'editText situé dans MainActivity
         Intent resultActivity = getIntent();
         String namePlayerOne = resultActivity.getStringExtra("namePlayerOne");
         String namePlayerTwo = resultActivity.getStringExtra("namePlayerTwo");
 
+
         // Initialisation des composants de la page activity_game.xml
         questionPlayer1 = findViewById(R.id.question_player_one);
         questionPlayer2 = findViewById(R.id.question_player_two);
+
+        winner_Game = findViewById(R.id.winnerGame);
 
         nom_joueur_1 = findViewById(R.id.name_player_one);
         nom_joueur_1.setText(namePlayerOne);
@@ -55,6 +69,9 @@ public class GameActivity extends AppCompatActivity {
         nom_joueur_2.setText(namePlayerTwo);
 
         bt_vrais_1 = findViewById(R.id.elevatedButtons);
+
+        // calcul si joueur à cliqué au bon moment
+        // si non, on lui enlève un point, si oui on lui en ajoute un
         bt_vrais_1.setOnClickListener(View -> {
             if (question.isReponse() == 0) {
                 pointJoueur1--;
@@ -62,8 +79,9 @@ public class GameActivity extends AppCompatActivity {
                 pointJoueur1++;
             }
 
+            // Va afficher le score du joueur un
             score1.setText(String.valueOf(pointJoueur1));
-
+            //Bloque le bouton "vrais" du joueur 1
             unlockPlayer(false);
         });
 
@@ -75,9 +93,9 @@ public class GameActivity extends AppCompatActivity {
             } else if (question.isReponse() == 1) {
                 pointJoueur2++;
             }
-
+            // Va afficher le score du joueur deux
             score2.setText(String.valueOf(pointJoueur2));
-
+            //Bloque le bouton "vrais" du joueur 2
             unlockPlayer(false);
         });
 
@@ -85,19 +103,21 @@ public class GameActivity extends AppCompatActivity {
         rejouer = findViewById(R.id.bt_restart);
         rejouer.setOnClickListener(view -> {
            this.finish();
-           // Permet de relancer le jeu
-           Intent gameActivity = new Intent(GameActivity.this, GameActivity.class);
+            // Permet de relancer le jeu
+            Intent thisElements = new Intent(GameActivity.this, GameActivity.class);
+            // Réinitialise le gagnant
+            winner_Game.setText("");
            // Remet les bons pseudos des joueurs
-            gameActivity.putExtra("namePlayerOne", namePlayerOne);
-            gameActivity.putExtra("namePlayerTwo", namePlayerTwo);
+            thisElements.putExtra("namePlayerOne", namePlayerOne);
+            thisElements.putExtra("namePlayerTwo", namePlayerTwo);
             // Lance l'activitée
-           startActivity(gameActivity);
+           startActivity(thisElements);
         });
 
         menu = findViewById(R.id.bt_menu);
         menu.setOnClickListener(view -> {
             menu.setVisibility(View.GONE);
-            // Si bouton cliqué, ouvrira la page menu
+            // Si bouton cliqué, ouvrira la page du menu
             Intent gameActivity = new Intent(GameActivity.this, MainActivity.class);
             startActivity(gameActivity);
         });
@@ -110,6 +130,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Au lancement de la page, exécutera ce qui a dans la foncton
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -125,14 +148,17 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
-     * Déclenche la recherche de question/réponse et stop le callback une fois terminé
+     * Déclenche la recherche de question/réponse et
+     * stop le callback une fois terminé
      */
     private void startQuestionIterative() {
         handler = new Handler();
         questionRunnable = new Runnable() {
             @Override
             public void run(){
-                //Détecter si c'est la dernière question
+                // Détecter si c'est la dernière question de la liste
+                // si non va afficher la question et permettre au joueur de cliquer
+                // sur le bouton
                 if(questionManager.hasNext()) {
                     unlockPlayer(true);
                     question = questionManager.getQuestion();
@@ -142,17 +168,21 @@ public class GameActivity extends AppCompatActivity {
                     questionPlayer2.setText(question.getQuestion());
 
                     handler.postDelayed(this,2000);
+                    // Si oui, va lancer la procédure de fin de jeu
                 } else {
-
+                    // Vérifie quel joueur a gagné
                     if (pointJoueur1 > pointJoueur2) {
-
+                        winner_Game.setText(String.valueOf(nom_joueur_1));
+                    } else {
+                        winner_Game.setText(String.valueOf(nom_joueur_2));
                     }
-                    // Rends les boutons visible
+                    // Rends les boutons "menu" et "Rejouer" visible
                     rejouer.setVisibility(View.VISIBLE);
                     menu.setVisibility(View.VISIBLE);
 
+                    // Affiche à la place de la question, que le jeu est terminé
                     questionPlayer1.setText(R.string.game_end_countdown);
-                    questionPlayer1.setText(R.string.game_end_countdown);
+                    questionPlayer2.setText(R.string.game_end_countdown);
 
                     unlockPlayer(false);
                 }
@@ -160,6 +190,11 @@ public class GameActivity extends AppCompatActivity {
         };
         handler.postDelayed(questionRunnable,1000);
     }
+
+    /**
+     * Lance le timeur avant le début du jeu et
+     * appel la variabe qui lance le jeu
+     */
     private void startCountDownTimer(){
         unlockPlayer(false);
         new CountDownTimer(6000,1000){
@@ -169,15 +204,22 @@ public class GameActivity extends AppCompatActivity {
                 questionPlayer2.setText(""+millisUntilFinished / 1000);
             }
             public void onFinish() {
-                //nom chaine caractere xml
+                // grise les boutons "vrais"
                 unlockPlayer(false);
                 questionPlayer1.setText("C'est parti!");
                 questionPlayer2.setText("C'est parti!");
+
+                // lance le jeu
                 startQuestionIterative();
             }
         }.start();
     }
 
+    /**
+     * Permet de déterminer si les boutons "vrais" peuvent être
+     * pressé ou non
+     * @param etat
+     */
     private void unlockPlayer(boolean etat) {
         // false = grisé
         // true = accessible
